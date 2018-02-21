@@ -1,7 +1,15 @@
+//
+//  LinuxMain.swift
+//  AsyncExtensions
+//
+//  Created by Gustavo Perdomo on 02/20/18.
+//  Copyright © 2018 Vapor Community. All rights reserved.
+//
+
 import XCTest
 
-import async_extensionsTests
+import AsyncExtensionsTests
 
 var tests = [XCTestCaseEntry]()
-tests += async_extensionsTests.allTests()
+tests += FutureExtensionsTests.allTests()
 XCTMain(tests)
