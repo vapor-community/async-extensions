@@ -8,8 +8,8 @@
 
 import XCTest
 
-import AsyncExtensionsTests
+@testable import AsyncExtensionsTests
 
-var tests = [XCTestCaseEntry]()
-tests += FutureExtensionsTests.allTests()
-XCTMain(tests)
+XCTMain([
+    testCase(FutureExtensionsTests.allTests)
+])

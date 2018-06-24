@@ -3,7 +3,7 @@ version: 2
 jobs:
   macos:
     macos:
-      xcode: "9.2.0"
+      xcode: "9.4.0"
     steps:
       - checkout
       - run: swift build
@@ -14,11 +14,9 @@ jobs:
 
   linux:
     docker:
-      - image: norionomura/swift:swift-4.1-branch
+      - image: swift:4.1
     steps:
       - checkout
-      - run: apt-get update
-      - run: apt-get install -yq libssl-dev
       - run: swift build
       - run: swift build -c release
       - run: swift test
@@ -28,4 +26,4 @@ workflows:
   tests:
     jobs:
       - linux
-      # - macos
+      - macos
