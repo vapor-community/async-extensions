@@ -5,6 +5,8 @@ Also see the [releases](https://github.com/vappor-community/async-extensions/rel
 
 ## Upcoming release
 
+# [v0.1.0](https://github.com/vapor-community/async-extensions/releases/tag/0.1.0)
+
 ### Added
 
 * **Future**

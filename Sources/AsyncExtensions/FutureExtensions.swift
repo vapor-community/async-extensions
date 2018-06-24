@@ -79,7 +79,7 @@ public extension Future where T: Equatable {
     public func equal(to value: T, or error: Error) throws -> Future<Bool> {
         return try self.map(to: Bool.self) { current in
             return current == value
-            }.true(or: error)
+        }.true(or: error)
     }
 
     /// AsyncExtensions: Check if the current value is different to the passed value.
@@ -110,7 +110,7 @@ public extension Future where T: Equatable {
     public func notEqual(to value: T, or error: Error) throws -> Future<Bool> {
         return try self.map(to: Bool.self) { current in
             return current != value
-            }.true(or: error)
+        }.true(or: error)
     }
 }
 

@@ -2,7 +2,7 @@
 
 AsyncExtensions is a collection of **Swift extensions**, with handy methods, syntactic sugar, and performance improvements for wide range of Async data types and classes.
 
-### [Whats New in v1.0.0?](https://github.com/vapor-community/async-extensions/blob/master/CHANGELOG.md#v100)
+### [Whats New in v0.1.0?](https://github.com/vapor-community/async-extensions/blob/master/CHANGELOG.md#v010)
 
 ## Requirements:
 
@@ -19,7 +19,7 @@ let package = Package(
     name: "YOUR_PROJECT_NAME",
     targets: [],
     dependencies: [
-        .package(url: "https://github.com/vapor-community/async-extensions.git", from: "1.0.0"),
+        .package(url: "https://github.com/vapor-community/async-extensions.git", from: "0.1.0"),
     ]
 )
 </code></pre>
@@ -52,9 +52,9 @@ Documentation for all extensions, with examples, is available at...
 We want your feedback.
 Please refer to [contributing guidelines](https://github.com/vapor-community/async-extensions/tree/master/CONTRIBUTING.md) before participating.
 
-## Slack Channel: [![Slack](http://vapor.team/badge.svg)](http://vapor.team)
+## Discord Channel:
 
-It is always nice to talk with other people using AsyncExtensions and exchange experiences, so come [join our Slack channel](http://vapor.team).
+It is always nice to talk with other people using AsyncExtensions and exchange experiences, so come [join our Discord channel](http://vapor.team).
 
 ## License
 
