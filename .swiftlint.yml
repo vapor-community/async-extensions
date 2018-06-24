@@ -1,0 +1,42 @@
+included:
+  - Sources
+  - Tests
+
+nesting:
+  type_level: 2
+
+opt_in_rules:
+  - closure_end_indentation
+  - empty_count
+  - file_header
+  - force_unwrapping
+  - literal_expression_end_indentation
+
+force_cast: error
+force_try: error
+force_unwrapping: error
+
+type_body_length:
+  warning: 300
+  error: 400
+
+function_body_length:
+  warning: 50
+  error: 80
+
+identifier_name:
+  min_length:
+    error: 3
+  excluded:
+    - id
+    
+file_header:
+  required_pattern: |
+                    \/\/
+                    \/\/  .*?\.swift
+                    \/\/  AsyncExtensions
+                    \/\/
+                    \/\/  Created by .*? on \d{1,2}\/\d{1,2}\/\d{2}\.
+                    \/\/  Copyright © \d{4} Vapor Community\. All rights reserved\.
+
+reporter: "emoji"
