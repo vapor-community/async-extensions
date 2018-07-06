@@ -13,102 +13,104 @@ import XCTest
 // MARK: - Methods
 
 final class FutureExtensionsTests: XCTestCase {
+    let worker: Worker = EmbeddedEventLoop()
+    
     func testTrue() throws {
-        let futTrue = Future(true)
-        let futFalse = Future(false)
+        let futTrue = Future.map(on: worker) { true }
+        let futFalse = Future.map(on: worker) { false }
 
-        XCTAssertEqual(try futTrue.true(or: CustomError()).blockingAwait(), true)
-        XCTAssertThrowsError(try futFalse.true(or: CustomError()).blockingAwait())
+        XCTAssertEqual(try futTrue.true(or: CustomError()).wait(), true)
+        XCTAssertThrowsError(try futFalse.true(or: CustomError()).wait())
     }
 
     func testFalse() throws {
-        let futTrue = Future(true)
-        let futFalse = Future(false)
+        let futTrue = Future.map(on: worker) { true }
+        let futFalse = Future.map(on: worker) { false }
 
-        XCTAssertThrowsError(try futTrue.false(or: CustomError()).blockingAwait())
-        XCTAssertEqual(try futFalse.false(or: CustomError()).blockingAwait(), true)
+        XCTAssertThrowsError(try futTrue.false(or: CustomError()).wait())
+        XCTAssertEqual(try futFalse.false(or: CustomError()).wait(), true)
     }
 
     func testEqual() throws {
-        let fut1 = Future(34)
-        let fut2 = Future("string")
+        let fut1 = Future.map(on: worker) { 34 }
+        let fut2 = Future.map(on: worker) { "string" }
 
-        XCTAssertEqual(try fut1.equal(to: 34).blockingAwait(), true)
-        XCTAssertEqual(try fut1.equal(to: 30).blockingAwait(), false)
+        XCTAssertEqual(try fut1.equal(to: 34).wait(), true)
+        XCTAssertEqual(try fut1.equal(to: 30).wait(), false)
 
-        XCTAssertNoThrow(try fut1.equal(to: 34, or: CustomError()).blockingAwait())
-        XCTAssertThrowsError(try fut1.equal(to: 30, or: CustomError()).blockingAwait())
+        XCTAssertNoThrow(try fut1.equal(to: 34, or: CustomError()).wait())
+        XCTAssertThrowsError(try fut1.equal(to: 30, or: CustomError()).wait())
 
-        XCTAssertEqual(try fut2.equal(to: "string").blockingAwait(), true)
-        XCTAssertEqual(try fut2.equal(to: "not-equal").blockingAwait(), false)
+        XCTAssertEqual(try fut2.equal(to: "string").wait(), true)
+        XCTAssertEqual(try fut2.equal(to: "not-equal").wait(), false)
 
-        XCTAssertNoThrow(try fut2.equal(to: "string", or: CustomError()).blockingAwait())
-        XCTAssertThrowsError(try fut2.equal(to: "not-equal", or: CustomError()).blockingAwait())
+        XCTAssertNoThrow(try fut2.equal(to: "string", or: CustomError()).wait())
+        XCTAssertThrowsError(try fut2.equal(to: "not-equal", or: CustomError()).wait())
     }
 
     func testNotEqual() throws {
-        let fut1 = Future(34)
-        let fut2 = Future("string")
+        let fut1 = Future.map(on: worker) { 34 }
+        let fut2 = Future.map(on: worker) { "string" }
 
-        XCTAssertEqual(try fut1.notEqual(to: 34).blockingAwait(), false)
-        XCTAssertEqual(try fut1.notEqual(to: 30).blockingAwait(), true)
+        XCTAssertEqual(try fut1.notEqual(to: 34).wait(), false)
+        XCTAssertEqual(try fut1.notEqual(to: 30).wait(), true)
 
-        XCTAssertThrowsError(try fut1.notEqual(to: 34, or: CustomError()).blockingAwait())
-        XCTAssertNoThrow(try fut1.notEqual(to: 30, or: CustomError()).blockingAwait())
+        XCTAssertThrowsError(try fut1.notEqual(to: 34, or: CustomError()).wait())
+        XCTAssertNoThrow(try fut1.notEqual(to: 30, or: CustomError()).wait())
 
-        XCTAssertEqual(try fut2.notEqual(to: "string").blockingAwait(), false)
-        XCTAssertEqual(try fut2.notEqual(to: "not-equal").blockingAwait(), true)
+        XCTAssertEqual(try fut2.notEqual(to: "string").wait(), false)
+        XCTAssertEqual(try fut2.notEqual(to: "not-equal").wait(), true)
 
-        XCTAssertThrowsError(try fut2.notEqual(to: "string", or: CustomError()).blockingAwait())
-        XCTAssertNoThrow(try fut2.notEqual(to: "not-equal", or: CustomError()).blockingAwait())
+        XCTAssertThrowsError(try fut2.notEqual(to: "string", or: CustomError()).wait())
+        XCTAssertNoThrow(try fut2.notEqual(to: "not-equal", or: CustomError()).wait())
     }
 
     func testGreater() throws {
-        let fut1 = Future(34)
+        let fut1 = Future.map(on: worker) { 34 }
 
-        XCTAssertEqual(try fut1.greater(than: 10).blockingAwait(), true)
-        XCTAssertEqual(try fut1.greater(than: 34).blockingAwait(), false)
-        XCTAssertEqual(try fut1.greater(than: 50).blockingAwait(), false)
+        XCTAssertEqual(try fut1.greater(than: 10).wait(), true)
+        XCTAssertEqual(try fut1.greater(than: 34).wait(), false)
+        XCTAssertEqual(try fut1.greater(than: 50).wait(), false)
 
-        XCTAssertNoThrow(try fut1.greater(than: 10, or: CustomError()).blockingAwait())
-        XCTAssertThrowsError(try fut1.greater(than: 34, or: CustomError()).blockingAwait())
-        XCTAssertThrowsError(try fut1.greater(than: 50, or: CustomError()).blockingAwait())
+        XCTAssertNoThrow(try fut1.greater(than: 10, or: CustomError()).wait())
+        XCTAssertThrowsError(try fut1.greater(than: 34, or: CustomError()).wait())
+        XCTAssertThrowsError(try fut1.greater(than: 50, or: CustomError()).wait())
     }
 
     func testGreaterOrEqual() throws {
-        let fut1 = Future(34)
+        let fut1 = Future.map(on: worker) { 34 }
 
-        XCTAssertEqual(try fut1.greaterOrEqual(to: 10).blockingAwait(), true)
-        XCTAssertEqual(try fut1.greaterOrEqual(to: 34).blockingAwait(), true)
-        XCTAssertEqual(try fut1.greaterOrEqual(to: 50).blockingAwait(), false)
+        XCTAssertEqual(try fut1.greaterOrEqual(to: 10).wait(), true)
+        XCTAssertEqual(try fut1.greaterOrEqual(to: 34).wait(), true)
+        XCTAssertEqual(try fut1.greaterOrEqual(to: 50).wait(), false)
 
-        XCTAssertNoThrow(try fut1.greaterOrEqual(to: 10, or: CustomError()).blockingAwait())
-        XCTAssertNoThrow(try fut1.greaterOrEqual(to: 34, or: CustomError()).blockingAwait())
-        XCTAssertThrowsError(try fut1.greaterOrEqual(to: 50, or: CustomError()).blockingAwait())
+        XCTAssertNoThrow(try fut1.greaterOrEqual(to: 10, or: CustomError()).wait())
+        XCTAssertNoThrow(try fut1.greaterOrEqual(to: 34, or: CustomError()).wait())
+        XCTAssertThrowsError(try fut1.greaterOrEqual(to: 50, or: CustomError()).wait())
     }
 
     func testLess() throws {
-        let fut1 = Future(34)
+        let fut1 = Future.map(on: worker) { 34 }
 
-        XCTAssertEqual(try fut1.less(than: 10).blockingAwait(), false)
-        XCTAssertEqual(try fut1.less(than: 34).blockingAwait(), false)
-        XCTAssertEqual(try fut1.less(than: 50).blockingAwait(), true)
+        XCTAssertEqual(try fut1.less(than: 10).wait(), false)
+        XCTAssertEqual(try fut1.less(than: 34).wait(), false)
+        XCTAssertEqual(try fut1.less(than: 50).wait(), true)
 
-        XCTAssertThrowsError(try fut1.less(than: 10, or: CustomError()).blockingAwait())
-        XCTAssertThrowsError(try fut1.less(than: 34, or: CustomError()).blockingAwait())
-        XCTAssertNoThrow(try fut1.less(than: 50, or: CustomError()).blockingAwait())
+        XCTAssertThrowsError(try fut1.less(than: 10, or: CustomError()).wait())
+        XCTAssertThrowsError(try fut1.less(than: 34, or: CustomError()).wait())
+        XCTAssertNoThrow(try fut1.less(than: 50, or: CustomError()).wait())
     }
 
     func testLessOrEqual() throws {
-        let fut1 = Future(34)
+        let fut1 = Future.map(on: worker) { 34 }
 
-        XCTAssertEqual(try fut1.lessOrEqual(to: 10).blockingAwait(), false)
-        XCTAssertEqual(try fut1.lessOrEqual(to: 34).blockingAwait(), true)
-        XCTAssertEqual(try fut1.lessOrEqual(to: 50).blockingAwait(), true)
+        XCTAssertEqual(try fut1.lessOrEqual(to: 10).wait(), false)
+        XCTAssertEqual(try fut1.lessOrEqual(to: 34).wait(), true)
+        XCTAssertEqual(try fut1.lessOrEqual(to: 50).wait(), true)
 
-        XCTAssertThrowsError(try fut1.lessOrEqual(to: 10, or: CustomError()).blockingAwait())
-        XCTAssertNoThrow(try fut1.lessOrEqual(to: 34, or: CustomError()).blockingAwait())
-        XCTAssertNoThrow(try fut1.lessOrEqual(to: 50, or: CustomError()).blockingAwait())
+        XCTAssertThrowsError(try fut1.lessOrEqual(to: 10, or: CustomError()).wait())
+        XCTAssertNoThrow(try fut1.lessOrEqual(to: 34, or: CustomError()).wait())
+        XCTAssertNoThrow(try fut1.lessOrEqual(to: 50, or: CustomError()).wait())
     }
 
     func testLinuxTestSuiteIncludesAllTests() throws {

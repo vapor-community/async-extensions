@@ -8,7 +8,7 @@ let package = Package(
         .library(name: "AsyncExtensions", targets: ["AsyncExtensions"])
     ],
     dependencies: [
-        .package(url: "https://github.com/vapor-community/async.git", from: "1.0.0-rc")
+        .package(url: "https://github.com/vapor/core.git", from: "3.0.0")
     ],
     targets: [
         .target(name: "AsyncExtensions", dependencies: ["Async"]),
