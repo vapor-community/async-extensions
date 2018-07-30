@@ -21,6 +21,7 @@ public extension Future where T == Bool {
     ///   - error: The error to be thrown.
     /// - Returns: The result of the comparison wrapped in a Future.
     /// - Throws: Throws the passed error in the opposite case.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func `true`(or error: Error) throws -> Future<Bool> {
         return self.map(to: Bool.self) { boolean in
             if !boolean {
@@ -40,6 +41,7 @@ public extension Future where T == Bool {
     ///   - error: The error to be thrown.
     /// - Returns: The result of the comparison wrapped in a Future.
     /// - Throws: Throws the passed error in the opposite case.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func `false`(or error: Error) throws -> Future<Bool> {
         return self.map(to: Bool.self) { boolean in
             if boolean {
@@ -59,6 +61,7 @@ public extension Future where T: Equatable {
     ///
     /// - Parameter value: The value to compare.
     /// - Returns: The result of the comparison wrapped in a Future.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func equal(to value: T) -> Future<Bool> {
         return self.map(to: Bool.self) { current in
             return current == value
@@ -76,6 +79,7 @@ public extension Future where T: Equatable {
     ///   - error: The error to be thrown.
     /// - Returns: The result of the comparison wrapped in a Future.
     /// - Throws: Throws the passed error if values are not equals.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func equal(to value: T, or error: Error) throws -> Future<Bool> {
         return try self.map(to: Bool.self) { current in
             return current == value
@@ -90,6 +94,7 @@ public extension Future where T: Equatable {
     ///
     /// - Parameter value: The value to compare.
     /// - Returns: The result of the comparison wrapped in a Future.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func notEqual(to value: T) -> Future<Bool> {
         return self.map(to: Bool.self) { current in
             return current != value
@@ -107,6 +112,7 @@ public extension Future where T: Equatable {
     ///   - error: The error to be thrown.
     /// - Returns: The result of the comparison wrapped in a Future.
     /// - Throws: Throws the passed error if values are not equals.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func notEqual(to value: T, or error: Error) throws -> Future<Bool> {
         return try self.map(to: Bool.self) { current in
             return current != value
@@ -123,6 +129,7 @@ public extension Future where T: Comparable {
     ///
     /// - Parameter value: The value to compare.
     /// - Returns: The result of the comparison wrapped in a Future.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func greater(than value: T) -> Future<Bool> {
         return self.map(to: Bool.self) { current in
             return current > value
@@ -140,6 +147,7 @@ public extension Future where T: Comparable {
     ///   - error: The error to be thrown.
     /// - Returns: The result of the comparison wrapped in a Future.
     /// - Throws: Throws the passed error if the current value is not greater than the passed value.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func greater(than value: T, or error: Error) throws -> Future<Bool> {
         return try greater(than: value).true(or: error)
     }
@@ -152,6 +160,7 @@ public extension Future where T: Comparable {
     ///
     /// - Parameter value: The value to compare.
     /// - Returns: The result of the comparison wrapped in a Future.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func greaterOrEqual(to value: T) -> Future<Bool> {
         return self.map(to: Bool.self) { current in
             return current >= value
@@ -169,6 +178,7 @@ public extension Future where T: Comparable {
     ///   - error: The error to be thrown.
     /// - Returns: The result of the comparison wrapped in a Future.
     /// - Throws: Throws the passed error if the current value is not greater or equal to the passed value.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func greaterOrEqual(to value: T, or error: Error) throws -> Future<Bool> {
         return try greaterOrEqual(to: value).true(or: error)
     }
@@ -181,6 +191,7 @@ public extension Future where T: Comparable {
     ///
     /// - Parameter value: The value to compare.
     /// - Returns: The result of the comparison wrapped in a Future.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func less(than value: T) -> Future<Bool> {
         return self.map(to: Bool.self) { current in
             return current < value
@@ -198,6 +209,7 @@ public extension Future where T: Comparable {
     ///   - error: The error to be thrown.
     /// - Returns: The result of the comparison wrapped in a Future.
     /// - Throws: Throws the passed error if the current value is not less than the passed value.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func less(than value: T, or error: Error) throws -> Future<Bool> {
         return try less(than: value).true(or: error)
     }
@@ -210,6 +222,7 @@ public extension Future where T: Comparable {
     ///
     /// - Parameter value: The value to compare.
     /// - Returns: The result of the comparison wrapped in a Future.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func lessOrEqual(to value: T) -> Future<Bool> {
         return self.map(to: Bool.self) { current in
             return current <= value
@@ -227,6 +240,7 @@ public extension Future where T: Comparable {
     ///   - error: The error to be thrown.
     /// - Returns: The result of the comparison wrapped in a Future.
     /// - Throws: Throws the passed error if the current value is not less or equal to the passed value.
+    @available(*, deprecated, message: "This package is deprecated... Please use the new VaporExt package")
     public func lessOrEqual(to value: T, or error: Error) throws -> Future<Bool> {
         return try lessOrEqual(to: value).true(or: error)
     }
