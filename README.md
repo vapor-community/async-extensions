@@ -1,3 +1,5 @@
+# This package is deprecated... Please use the new VaporExt package
+
 # AsyncExtensions
 
 AsyncExtensions is a collection of **Swift extensions**, with handy methods, syntactic sugar, and performance improvements for wide range of Async data types and classes.
@@ -6,8 +8,8 @@ AsyncExtensions is a collection of **Swift extensions**, with handy methods, syn
 
 ## Requirements:
 
-* Async 1.0.0
-* Swift 4.1+
+- Async 1.0.0
+- Swift 4.1+
 
 ## Installation
 
